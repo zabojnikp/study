@@ -1,0 +1,4 @@
+[3] 10:12:58 PM: Log started for 'C:\Tosca_Projects\TOSCA_Workspaces\Automation_Specialist_level1\Automation_Specialist_level1.tws'
+[3] 10:12:58 PM: Log level: 4
+[3] 10:12:58 PM: Release: 11.1.0.12209
+[4] 10:14:19 PM:  ShowStatusInfo: 'Creating new Workspace!'

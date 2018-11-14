@@ -1,0 +1,8 @@
+[3] 4:02:39 PM: Log started for 'C:\Tosca_Projects\TOSCA_Workspaces\AS1Training\AS1Training.tws'
+[3] 4:02:39 PM: Log level: 4
+[3] 4:02:39 PM: Release: 11.1.0.12209
+[4] 4:02:39 PM:  ShowStatusInfo: 'Refresh  'WindowLabels''
+[4] 4:02:39 PM:  ShowStatusInfo: 'Refresh all finished'
+[4] 4:02:40 PM:  ShowStatusInfo: 'Ready'
+[4] 4:02:44 PM:  ShowStatusInfo: 'Refresh  'WindowLabels''
+[4] 4:02:44 PM:  ShowStatusInfo: 'Refresh all finished'

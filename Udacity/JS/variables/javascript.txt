@@ -1,0 +1,2 @@
+var name = "Petra"
+console.log (name)

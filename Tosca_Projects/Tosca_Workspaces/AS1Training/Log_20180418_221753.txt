@@ -1,0 +1,3 @@
+[3] 10:17:53 PM: Log started for 'C:\Tosca_Projects\TOSCA_Workspaces\AS1Training\AS1Training.tws'
+[3] 10:17:53 PM: Log level: 4
+[3] 10:17:53 PM: Release: 11.1.0.12209

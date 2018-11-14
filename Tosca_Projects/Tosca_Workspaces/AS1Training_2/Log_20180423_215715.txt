@@ -1,0 +1,5 @@
+[3] 9:57:15 PM: Log started for 'C:\Users\petra.zabojnikova\Documents\Projects\Tosca_Projects\Tosca_Workspaces\AS1Training_2\AS1Training_2.tws'
+[3] 9:57:15 PM: Log level: 4
+[3] 9:57:15 PM: Release: 11.1.0.12209
+[3] 9:57:15 PM: Error while trying to return licenses to LicenseServer. Server response error.
+The remote name could not be resolved: 'flex1178.compliance.flexnetoperations.com'

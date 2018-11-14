@@ -1,0 +1,4 @@
+[3] 5:43:30 PM: Log started for 'C:\Users\petra.zabojnikova\Documents\Projects\Tosca_Projects\Tosca_Workspaces\AS1Training_2\AS1Training_2.tws'
+[3] 5:43:30 PM: Log level: 4
+[3] 5:43:30 PM: Release: 11.1.0.12209
+[4] 5:43:30 PM:  ShowStatusInfo: 'Ready'

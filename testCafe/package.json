@@ -1,0 +1,8 @@
+{
+  "name": "testcafe-test",
+  "version": "1.0",
+  "dependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "testcafe": "^0.18.6"
+  }
+}

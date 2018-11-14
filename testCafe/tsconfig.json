@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./node_modules/testcafe/type-defs"
+        ],
+        "moduleResolution": "node"
+    }
+}

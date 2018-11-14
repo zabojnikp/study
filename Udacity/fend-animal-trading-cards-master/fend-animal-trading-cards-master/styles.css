@@ -1,0 +1,51 @@
+#card{
+    font-family: serif, system-ui, sans-serif;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #AFD5AA;
+    padding: 5px;
+    width: 300px;
+    color: #1C2541;
+    border-radius: 5px;
+    box-shadow: 6px 6px 22px -1px #AFD5AA;
+    background-color: #67B3D1;
+}
+
+.information{
+    border-style: solid;
+    border-width: 1px;
+    border-color:#AFD5AA;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    background-color: #8BE8CB;
+    box-shadow: 1px 9px 37px 1px #AFD5AA;
+    
+}
+
+.description{
+    font-style: italic;
+}
+
+ul{
+    list-style: none;
+    text-align: left;
+    padding: 0px;
+    margin: 0px;
+}
+.label{
+    font-weight: bold;
+}
+
+h2 {
+    font-family: sans-serif;
+    text-align: center;
+}
+img {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    border-radius: 5px;
+    
+}
