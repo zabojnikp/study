@@ -1,19 +1,16 @@
-list = ['chocolate', 'cote']
-letter = []
+words = ['ships', 'hips']
+matching_words = []
 
 def is_anagram(list):
+    if not words:
+        return False
+   
     i = 0
-    is_anagram = False
-    while i < len(list): 
-        for y in list[i]:
-            letter.append(y)  
-            letter.sort()
-            for x in letter:
-                if x in list[i + 1]:
-                    is_anagram = True
-
+    matching_words.append(list[i])
+    while i < (len(words) - 1):
+        if sorted(list[i].lower()) == sorted(list[i+1].lower()):
+            matching_words.append(list[i + 1])
         i += 1
-            
-    return (letter)
- 
-print(is_anagram(list))
+    return len(matching_words) == len(words)
+
+print(is_anagram(words))
