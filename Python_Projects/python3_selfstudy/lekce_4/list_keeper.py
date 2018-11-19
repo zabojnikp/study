@@ -1,29 +1,33 @@
 import os 
 
 def main():
-    saved = False
-    files = []
-    filename, files = choose_file()
-    
+    fileSaved = False
+    items = []
+    filename, items = choose_file()
+    print("Strazce seznamu")
+   
     while True:
-        print("Strazce seznamu")
-        print_files(files)
-        choice = get_choice(files, saved)
+        print_items(items)
+        user_choice = get_user_choice(items, fileSaved)
         
-        if choice in "Pp":
-            item = add_item(files)
+        if user_choice in "Pp":
+            item = add_item(items)
             print("Prvek {0} byl pridan do souboru".format(item))
-        elif choice in 'Vv':
-            item = delete_item(files)
-            print("Prvek {0} byl smazan ze souboru".format(item))
-        elif choice in "Uu":
-            item = save_items(filename, files)
-            if item:
-                saved = True
+        elif user_choice in 'Vv':
+            item = delete_item(items)
+            if item is not None:
+                print("Prvek {0} byl smazan ze souboru".format(item))
+        elif user_choice in "Uu":
+            save_items(filename, items)
+            next_actions = get_string("Chcete pokracovat? (a / n)", field='continue', default='a') 
+            if next_actions.lower() in ('a', 'ano'):
+                continue
             else:
                 break
-        #elif choice in "Kk":
-            
+        else:
+            close_file(filename, items)
+            break
+    print('Goodbye!')
 
 
 def choose_file():
@@ -32,11 +36,15 @@ def choose_file():
     enter_filename = False
     files = [file for file in os.listdir('.') if file.endswith('.lst')]
     if files:
-        index = get_integer("Zvolte cislo souboru nebo 0 pro vytvoreni noveho", 'cislo souboru', default=0)
-        if index == 0:
-            enter_filename = True
-        else:
-            filename = files[index - 1]
+        try:
+            index = int(get_string("Zvolte cislo souboru nebo 0 pro vytvoreni noveho", 'cislo souboru', default=0))
+            if index == 0:
+                enter_filename = True
+            else:
+                filename = files[index - 1]
+                items = load_file_items(filename)
+        except ValueError:
+            print("Integer error")
     else:
         enter_filename = True
     
@@ -44,17 +52,29 @@ def choose_file():
         filename = get_string("Zadejte jmeno noveho souboru", 'filename')     
         if not filename.endswith('.lst'):
             filename += '.lst'
-    return filename, files
+        items = []
+    return filename, items
 
+def load_file_items(filename):
+    fh = None
+    items = []
+    try:
+        for line in open(filename, encoding="utf8"):
+            items.append(line.rstrip())
+    except EnvironmentError:
+        print("Not able to load {} file".format(filename))
+    finally:
+        if fh is not None:
+            fh.close()
+    return items
 
-def print_files(files):
-    if not files:
-        print("-- zatim neexistuji zadne soubory s priponou .lst --")
+def print_items(items):
+    if not items:
+        print("-- v seznamu nejsou zadne prvky --")
     else:
-        for i, item in enumerate(files):
+        for i, item in enumerate(items):
             print('{0}: {item}'.format(i + 1, **locals()))
     print()
-
 
 def get_string(message, field='string', default=None):
     message += ": " if default is None else " [{0}]: ".format(default)
@@ -66,33 +86,14 @@ def get_string(message, field='string', default=None):
                     return default
                 else:
                     raise ValueError("{field} nesmi byt prazdny/a".format(**locals()))
-
             return user_input
-
         except ValueError as err:
-            print('Chyba!', err)
+            print('String Error!', err)
 
-
-def get_integer(message, field='integer', default=None):
-    message += ": " if default is None else " [{0}]: ".format(default)
+def get_user_choice(items, fileSaved):
     while True:
-        try:
-            user_input = input(message)
-            number = int(user_input)
-            if not number:
-                if default is not None:
-                    return default
-                else:
-                    raise ValueError("{field} nesmi byt prazdny/a".format(**locals()))
-            return number
-        except ValueError as err:
-            print("Error!", err)
-
-
-def get_choice(files, saved):
-    while True:
-        if files:
-            if not saved:
+        if items:
+            if not fileSaved:
                 menu ="[P]řidat   [V]ymazat   [U]lozit   [K]onec" 
                 valid_choice = 'PpVvUuKk'
             else:
@@ -108,6 +109,7 @@ def get_choice(files, saved):
         if user_choice not in valid_choice:
             print("CHYBA: neplatná volba--zadejte některou z těchto možností: '{0}'".format(valid_choice))
             input("Pro pokracovani stisknete klavesu Enter ...")
+            
 
         else:
             return user_choice
@@ -119,10 +121,13 @@ def add_item(items):
     return item
 
 def delete_item(items):
-    index = get_integer("Zadej index na vymazani daneho prvku (nebo 0 pro zruseni mazani)", field='delete')
-    if index != 0:
-        item = items.pop(index - 1)
-        return item
+    try:
+        index = int(get_string("Zadej index na vymazani daneho prvku (nebo 0 pro zruseni mazani)", field='delete', default=0))
+        if index != 0:
+            item = items.pop(index - 1)
+            return item
+    except ValueError:
+        print("Integer error")
 
 def save_items(filename, items):
     fh = None
@@ -136,16 +141,16 @@ def save_items(filename, items):
 
     else:
         print("Seznam byl ulozed do {0}, celkem ulozeno prvku: {1}".format(filename, len(items)))
-        pokracovat = get_string("Chcete pokracovat? (a / n)", field='continue', default='a')
-        if pokracovat.lower() in ("a", "ano"):
-            return True
-        else:
-            return False
     
     finally:
         if fh is not None:
             fh.close()
+    
+    return len(items)
 
-
+def close_file(filename, items):
+    save_changes = get_string("Ulozit provedene zmeny (a/n)", 'save_changes', default='a')
+    if save_changes.lower() in ('a', 'ano'):
+        save_items(filename, items)
 
 main()
