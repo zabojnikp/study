@@ -1,6 +1,10 @@
+#!/usr/bin/python3
 import optparse
 import os
 import datetime
+import locale
+
+locale.setlocale(locale.LC_ALL, '')
 
 def main():
     opts, path = process_option()
@@ -31,7 +35,7 @@ def main():
     file_dir_data.sort(key=lambda x: str(x[order_key]))
     
     for i in range(0, len(file_dir_data)):
-        print("{0[0]} {0[1]:^10} {0[2]:>5} {0[3]}".format(file_dir_data[i]))
+        print("{0[0]} {0[1]:^10} {0[2]:>5n} {0[3]}".format(file_dir_data[i]))
     print(summary_line)
 
 def get_items_info(opts, items):
@@ -39,9 +43,9 @@ def get_items_info(opts, items):
     for item in items:
         modified = datetime.datetime.fromtimestamp(os.path.getmtime(item)).strftime("%m/%d/%Y %I:%M %p")
         folder = '<DIR>' if os.path.isdir(item) else ''
-        size = ''
+        size = 0
         if os.path.isfile(item):
-            size = os.path.getsize(item) if opts.sizes else ''
+            size = os.path.getsize(item) if opts.sizes else 0
         items_info.append((modified, folder, size, item))
     
     order_key = 0 if opts.order in {"m", "modified"} else (2 if opts.order in {"s", "size"} else 3)
