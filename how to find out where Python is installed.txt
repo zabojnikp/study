@@ -1,0 +1,25 @@
+How to find out where Python is installed:
+$ python
+Python 2.6.6 (r266:84297, Aug 24 2010, 18:13:38) [MSC v.1500 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> sys.executable
+'c:\\Python26\\python.exe'
+>>> sys.exec_prefix
+'c:\\Python26'
+>>>
+>>> print '\n'.join(sys.path)
+
+c:\Python26\lib\site-packages\setuptools-0.6c11-py2.6.egg
+c:\Python26\lib\site-packages\nose-1.0.0-py2.6.egg
+C:\Windows\system32\python26.zip
+c:\Python26\DLLs
+c:\Python26\lib
+c:\Python26\lib\plat-win
+c:\Python26\lib\lib-tk
+c:\Python26
+c:\Python26\lib\site-packages
+c:\Python26\lib\site-packages\win32
+c:\Python26\lib\site-packages\win32\lib
+c:\Python26\lib\site-packages\Pythonwin
+c:\Python26\lib\site-packages\wx-2.8-msw-unicode
